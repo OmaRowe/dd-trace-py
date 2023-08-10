@@ -83,3 +83,47 @@ build = [
 env.CIRCLECI.type = [
     { value = "virtual", if = ["true"] },
 ]
+
+[envs.integration_test]
+template = "integration_test"
+extra-dependencies = [
+    "mock==5.0.1",
+    "pytest==7.2.2",
+    "pytest-mock==3.10.0",
+    "coverage==7.2.2",
+    "pytest-cov==4.0.0",
+    "opentracing==2.4.0",
+    "hypothesis==6.45.0",
+]
+
+[envs.integration_test.scripts]
+start-services = [ "docker compose up -d $DOCKER_SERVICES" ]
+stop-services = [ "docker compose down {args}" ]
+
+[envs.appsec]
+template = "integration_test"
+dependencies = [
+    "requests==2.30.0",
+    "gunicorn==20.1.0",
+    "flask==2.3.2",
+    "pycryptodome==3.17",
+    "cryptography==40.0.2",
+    "astunparse==1.6.3",
+    "pytest-docker==2.0.0",
+]
+
+[[envs.appsec.matrix]]
+python = ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+
+[envs.appsec.env-vars]
+DD_IAST_REQUEST_SAMPLING = "100"  # Override default 30% to analyze all IAST requests
+DOCKER_SERVICES = "testagent"
+SNAPSHOT_CI = "1"
+DD_TRACE_AGENT_URL = "http://localhost:9126"
+
+[envs.appsec.scripts]
+test = [
+    "start-services",
+    "pytest tests/appsec {args}",
+]

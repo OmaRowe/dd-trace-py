@@ -185,6 +185,42 @@ commands:
           when: always
           command: bash ./scripts/get-test-agent-results.sh
 
+  run_hatch_test:
+    description: "Run hatch env test"
+    parameters:
+      env:
+        type: string
+        default: ""
+      store_coverage:
+        type: boolean
+        default: true
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - setup_hatch
+      - setup_remote_docker:
+          version: 20.10.14
+      - run:
+          name: Run tests
+          command: |
+            hatch env show --json | jq -r 'keys[] | select(. | contains("<< parameters.env >>"))' | sort | circleci tests split | xargs -n 1 -I {} hatch run {}:test
+      - when:
+          condition:
+            and:
+              - << pipeline.parameters.coverage >>
+              - << parameters.store_coverage >>
+          steps:
+            - save_coverage
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+      - run:
+          name: Get APM Test Agent Trace Check Results
+          when: always
+          command: bash ./scripts/get-test-agent-results.sh
+
 executors:
   cimg_base:
     docker:
@@ -314,12 +350,12 @@ jobs:
             - "."
 
   appsec:
-    <<: *machine_executor
+    executor: ddtrace_dev
+    parallelism: 5
     steps:
-      - run_test:
-          pattern: 'appsec'
-          snapshot: true
-    
+      - run_hatch_test:
+          env: 'appsec'
+
   aws_lambda:
     <<: *machine_executor
     steps:
