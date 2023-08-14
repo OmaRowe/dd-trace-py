@@ -172,7 +172,7 @@ def minus(a, b):
 
 minus_two = partial(minus, b=2)  # partial funcs need special handling (no module)
 
-# disabling flake8 test below, yes, declaring a func like this is bad, we know
+# disabling style rule below, yes, declaring a func like this is bad, we know
 plus_three = lambda x: x + 3  # noqa: E731
 
 

@@ -5,11 +5,11 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+from msgpack import Packer
 from msgpack import PackOverflowError
 from msgpack import PackValueError
-from msgpack import Packer
-from msgpack import UnpackValueError
 from msgpack import Unpacker
+from msgpack import UnpackValueError
 from msgpack import unpackb
 import pytest
 
@@ -17,12 +17,12 @@ from ddtrace.internal._encoding import packb
 
 
 def test_integer():
-    x = -(2 ** 63)
+    x = -(2**63)
     assert unpackb(packb(x)) == x
     with pytest.raises(PackOverflowError):
         packb(x - 1)
 
-    x = 2 ** 64 - 1
+    x = 2**64 - 1
     assert unpackb(packb(x)) == x
     with pytest.raises(PackOverflowError):
         packb(x + 1)
@@ -30,16 +30,16 @@ def test_integer():
 
 def test_array_header():
     packer = Packer()
-    packer.pack_array_header(2 ** 32 - 1)
+    packer.pack_array_header(2**32 - 1)
     with pytest.raises(PackValueError):
-        packer.pack_array_header(2 ** 32)
+        packer.pack_array_header(2**32)
 
 
 def test_map_header():
     packer = Packer()
-    packer.pack_map_header(2 ** 32 - 1)
+    packer.pack_map_header(2**32 - 1)
     with pytest.raises(PackValueError):
-        packer.pack_array_header(2 ** 32)
+        packer.pack_array_header(2**32)
 
 
 def test_max_str_len():

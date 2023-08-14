@@ -73,7 +73,7 @@ class VulnerabilityBase(Operation):
             # type: (Callable, Any, Any, Any) -> Any
             """Get the current root Span and attach it to the wrapped function. We need the span to report the vulnerability
             and update the context with the report information.
-            """
+            """  # noqa: E501
             if oce.request_has_quota and cls.has_quota():
                 return func(wrapped, instance, args, kwargs)
             else:
@@ -165,7 +165,7 @@ class VulnerabilityBase(Operation):
         if vulnerability.evidence.valueParts is not None:
             return "".join(
                 [
-                    (part.get("value", "") if type(part) is not str else part)
+                    (part.get("value", "") if type(part) is not str else part)  # noqa: E721
                     for part in vulnerability.evidence.valueParts
                 ]
             )

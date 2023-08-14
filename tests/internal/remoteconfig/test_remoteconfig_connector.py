@@ -16,7 +16,7 @@ from ddtrace.internal.remoteconfig._connectors import PublisherSubscriberConnect
 )
 def test_hash(data):
     connector = PublisherSubscriberConnector()
-    assert type(connector._hash_config(data, None)) is int
+    assert type(connector._hash_config(data, None)) is int  # noqa: E721
 
 
 def test_connector():

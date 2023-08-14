@@ -38,7 +38,7 @@ def test_exceeding_unpacker_read_size():
 
     read_count = 0
     for idx, o in enumerate(unpacker):
-        assert type(o) == bytes
+        assert type(o) == bytes  # noqa: E721
         assert o == gen_binary_data(idx)
         read_count += 1
 

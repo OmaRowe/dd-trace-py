@@ -2,8 +2,8 @@ from functools import reduce
 import json
 import operator
 import os
-from typing import Set
 from typing import TYPE_CHECKING
+from typing import Set
 import zlib
 
 import attr

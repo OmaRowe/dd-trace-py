@@ -7,9 +7,9 @@ import pytest
 
 from ddtrace.internal.compat import PY3
 import ddtrace.internal.constants as constants
-from tests.appsec.test_processor import RULES_GOOD_PATH
 from tests.appsec.test_processor import _ALLOWED_IP
 from tests.appsec.test_processor import _BLOCKED_IP
+from tests.appsec.test_processor import RULES_GOOD_PATH
 from tests.utils import snapshot
 from tests.webclient import Client
 

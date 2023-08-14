@@ -235,7 +235,7 @@ class WrappedHashClient(_WrapperBase):
             ),
             command,
             *args,
-            **kwargs
+            **kwargs,
         )
 
 
@@ -275,14 +275,14 @@ def _get_query_string(args):
     if type(arg) is dict:
         arg = list(arg)
 
-    if type(arg) is str:
+    if type(arg) is str:  # noqa: E721
         keys = arg
-    elif type(arg) is bytes:
+    elif type(arg) is bytes:  # noqa: E721
         keys = arg.decode()
     elif type(arg) is list and len(arg):
-        if type(arg[0]) is str:
+        if type(arg[0]) is str:  # noqa: E721
             keys = " ".join(arg)
-        elif type(arg[0]) is bytes:
+        elif type(arg[0]) is bytes:  # noqa: E721
             keys = b" ".join(arg).decode()
 
     return keys

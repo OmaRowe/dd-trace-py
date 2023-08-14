@@ -10,7 +10,7 @@ from tests.utils import assert_span_http_status_code
 
 @pytest.mark.skipif(django.VERSION < (1, 10), reason="requires django version >= 1.10")
 @pytest.mark.django_db
-def test_trace_exceptions(client, test_spans):  # noqa flake8 complains about shadowing test_spans
+def test_trace_exceptions(client, test_spans):
     response = client.get("/users/")
 
     # Our custom exception handler is setting the status code to 500

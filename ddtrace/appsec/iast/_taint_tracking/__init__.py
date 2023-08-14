@@ -1,5 +1,4 @@
 # #!/usr/bin/env python3
-# flake8: noqa
 from typing import TYPE_CHECKING
 
 from ddtrace.appsec.iast._metrics import _set_metric_iast_executed_source

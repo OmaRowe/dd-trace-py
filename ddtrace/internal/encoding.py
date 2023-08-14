@@ -1,9 +1,9 @@
 import json
+from typing import TYPE_CHECKING
 from typing import Any
 from typing import Dict
 from typing import List
 from typing import Optional
-from typing import TYPE_CHECKING
 
 from ._encoding import ListStringTable
 from ._encoding import MsgpackEncoderV03
@@ -67,7 +67,7 @@ class _EncoderBase(object):
         # int. let's special case that here, because it's sure to happen in
         # customer code.
         err = d.get("error")
-        if err and type(err) == bool:
+        if err and type(err) == bool:  # noqa: E721
             d["error"] = 1
 
         if span.start_ns:

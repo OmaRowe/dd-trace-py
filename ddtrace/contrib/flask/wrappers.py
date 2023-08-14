@@ -3,10 +3,10 @@ from ddtrace.internal import core
 from ddtrace.internal.constants import COMPONENT
 from ddtrace.vendor.wrapt import function_wrapper
 
-from .. import trace_utils
 from ...internal.logger import get_logger
 from ...internal.utils.importlib import func_name
 from ...pin import Pin
+from .. import trace_utils
 from .helpers import get_current_app
 
 

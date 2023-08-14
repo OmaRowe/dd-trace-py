@@ -1,8 +1,8 @@
 import abc
 import re
+from typing import TYPE_CHECKING
 from typing import List
 from typing import Optional
-from typing import TYPE_CHECKING
 
 import ddtrace
 from ddtrace.ext import SpanTypes

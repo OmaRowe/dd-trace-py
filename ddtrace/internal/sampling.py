@@ -1,7 +1,7 @@
 import json
 import re
-from typing import Optional
 from typing import TYPE_CHECKING
+from typing import Optional
 
 
 # TypedDict was added to typing in python 3.8
@@ -41,7 +41,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
 # Big prime number to make hashing better distributed
 KNUTH_FACTOR = 1111111111111111111
-MAX_SPAN_ID = 2 ** 64
+MAX_SPAN_ID = 2**64
 
 
 class SamplingMechanism(object):

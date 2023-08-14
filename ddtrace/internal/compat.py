@@ -111,7 +111,6 @@ try:
             or isgeneratorfunction(f)
         )
 
-
 except ImportError:
     from inspect import getargspec as getfullargspec  # type: ignore[assignment]  # noqa: F401
 
@@ -285,7 +284,6 @@ try:
         # type: (str) -> None
         if sys.version_info < (3, 7):
             Pep562(module_name)
-
 
 except ImportError:
 

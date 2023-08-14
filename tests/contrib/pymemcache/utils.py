@@ -52,9 +52,9 @@ class MockSocketModule(object):
 
 # Compatibility to get a string back from a request
 def _str(s):
-    if type(s) is str:
+    if type(s) is str:  # noqa: E721
         return s
-    elif type(s) is bytes:
+    elif type(s) is bytes:  # noqa: E721
         return s.decode()
     else:
         return str(s)

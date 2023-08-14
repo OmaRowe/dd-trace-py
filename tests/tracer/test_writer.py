@@ -98,7 +98,7 @@ class AgentWriterTests(BaseTestCase):
             for i in range(10):
                 writer.write([Span(name="name", trace_id=i, span_id=j, parent_id=j - 1 or None) for j in range(5)])
             writer.write(
-                [Span(name="a" * 5000, trace_id=i, span_id=j, parent_id=j - 1 or None) for j in range(2 ** 10)]
+                [Span(name="a" * 5000, trace_id=i, span_id=j, parent_id=j - 1 or None) for j in range(2**10)]
             )
             writer.stop()
             writer.join()
@@ -226,7 +226,7 @@ class AgentWriterTests(BaseTestCase):
             for i in range(10):
                 writer.write([Span(name="name", trace_id=i, span_id=j, parent_id=j - 1 or None) for j in range(5)])
             writer.write(
-                [Span(name="a" * 5000, trace_id=i, span_id=j, parent_id=j - 1 or None) for j in range(2 ** 10)]
+                [Span(name="a" * 5000, trace_id=i, span_id=j, parent_id=j - 1 or None) for j in range(2**10)]
             )
             writer.stop()
             writer.join()
@@ -293,7 +293,7 @@ class AgentWriterTests(BaseTestCase):
             ]
 
             traces_too_big = [
-                [Span(name="a" * 5000, trace_id=i, span_id=j, parent_id=j - 1 or None) for j in range(2 ** 10)]
+                [Span(name="a" * 5000, trace_id=i, span_id=j, parent_id=j - 1 or None) for j in range(2**10)]
                 for i in range(4)
             ]
 
@@ -433,7 +433,6 @@ class _BaseHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 
 class _APIEndpointRequestHandlerTest(_BaseHTTPRequestHandler):
-
     expected_path_prefix = None
 
     def do_PUT(self):
@@ -753,7 +752,6 @@ def test_writer_api_version_selection(
 
     # Mock the value of `sys.platform` to be a specific value
     with mock_sys_platform(sys_platform):
-
         # If desired, set the DD_TRACE_API_VERSION env variable
         if ddtrace_api_version is not None:
             monkeypatch.setenv("DD_TRACE_API_VERSION", ddtrace_api_version)
@@ -821,5 +819,5 @@ def test_trace_with_128bit_trace_ids():
 
     spans = tracer.pop()
     chunk_root = spans[0]
-    assert chunk_root.trace_id >= 2 ** 64
+    assert chunk_root.trace_id >= 2**64
     assert chunk_root._meta[HIGHER_ORDER_TRACE_ID_BITS] == "{:016x}".format(parent.trace_id >> 64)

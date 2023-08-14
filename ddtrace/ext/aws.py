@@ -1,8 +1,8 @@
+from typing import TYPE_CHECKING
 from typing import Any
 from typing import Dict
 from typing import FrozenSet
 from typing import Set
-from typing import TYPE_CHECKING
 from typing import Tuple
 
 from ddtrace.contrib.trace_utils import set_flattened_tags

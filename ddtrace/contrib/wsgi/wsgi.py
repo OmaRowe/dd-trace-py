@@ -37,10 +37,10 @@ from ddtrace.propagation._utils import from_wsgi_header
 from ddtrace.propagation.http import HTTPPropagator
 from ddtrace.vendor import wrapt
 
-from .. import trace_utils
 from ...constants import SPAN_KIND
 from ...internal import core
 from ...internal.utils import http as http_utils
+from .. import trace_utils
 
 
 log = get_logger(__name__)

@@ -225,7 +225,7 @@ class PyramidTestCase(PyramidBase):
         assert_span_http_status_code(s, 500)
         assert s.get_tag(http.URL) == "http://localhost/error"
         assert s.get_tag("pyramid.route.name") == "error"
-        assert type(s.error) == int
+        assert type(s.error) == int  # noqa: E721
 
     def test_json(self):
         res = self.app.get("/json", status=200)

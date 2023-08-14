@@ -5,10 +5,10 @@ import logging
 import os
 import sys
 import threading
+from typing import TYPE_CHECKING
 from typing import Dict
 from typing import List
 from typing import Optional
-from typing import TYPE_CHECKING
 from typing import TextIO
 
 import six
@@ -18,10 +18,6 @@ from ddtrace import config
 from ddtrace.internal.utils.retry import fibonacci_backoff_with_jitter
 from ddtrace.vendor.dogstatsd import DogStatsd
 
-from .. import agent
-from .. import compat
-from .. import periodic
-from .. import service
 from ...constants import KEEP_SPANS_RATE_KEY
 from ...internal.telemetry import telemetry_writer
 from ...internal.utils.formats import asbool
@@ -30,6 +26,10 @@ from ...internal.utils.http import Response
 from ...internal.utils.time import StopWatch
 from ...sampler import BasePrioritySampler
 from ...sampler import BaseSampler
+from .. import agent
+from .. import compat
+from .. import periodic
+from .. import service
 from .._encoding import BufferFull
 from .._encoding import BufferItemTooLarge
 from ..agent import get_connection
@@ -39,9 +39,9 @@ from ..runtime import container
 from ..serverless import in_azure_function_consumption_plan
 from ..serverless import in_gcp_function
 from ..sma import SimpleMovingAverage
+from .writer_client import WRITER_CLIENTS
 from .writer_client import AgentWriterClientV3
 from .writer_client import AgentWriterClientV4
-from .writer_client import WRITER_CLIENTS
 from .writer_client import WriterClientBase
 
 
@@ -216,7 +216,7 @@ class HTTPWriter(periodic.PeriodicService, TraceWriter):
 
         self._send_payload_with_backoff = fibonacci_backoff_with_jitter(  # type ignore[assignment]
             attempts=self.RETRY_ATTEMPTS,
-            initial_wait=0.618 * self.interval / (1.618 ** self.RETRY_ATTEMPTS) / 2,
+            initial_wait=0.618 * self.interval / (1.618**self.RETRY_ATTEMPTS) / 2,
             until=lambda result: isinstance(result, Response),
         )(self._send_payload)
 

@@ -76,7 +76,7 @@ class _TracedConnection(wrapt.ObjectProxy):
 
 
 @with_traced_module
-async def _traced_connect(asyncpg, pin, func, instance, args, kwargs):
+async def _traced_connect(asyncpg, pin, func, instance, args, kwargs):  # noqa: F811
     """Traced asyncpg.connect().
 
     connect() is instrumented and patched to return a connection proxy.
@@ -115,13 +115,13 @@ async def _traced_query(pin, method, query, args, kwargs):
 
 
 @with_traced_module
-async def _traced_protocol_execute(asyncpg, pin, func, instance, args, kwargs):
+async def _traced_protocol_execute(asyncpg, pin, func, instance, args, kwargs):  # noqa: F811
     state = get_argument_value(args, kwargs, 0, "state")  # type: Union[str, PreparedStatement]
     query = state if isinstance(state, str) else state.query
     return await _traced_query(pin, func, query, args, kwargs)
 
 
-def _patch(asyncpg):
+def _patch(asyncpg):  # noqa: F811
     # type: (ModuleType) -> None
     wrap(asyncpg, "connect", _traced_connect(asyncpg))
     for method in ("execute", "bind_execute", "query", "bind_execute_many"):
@@ -130,7 +130,7 @@ def _patch(asyncpg):
 
 def patch():
     # type: () -> None
-    import asyncpg
+    import asyncpg  # noqa: F811
 
     if getattr(asyncpg, "_datadog_patch", False):
         return
@@ -141,7 +141,7 @@ def patch():
     setattr(asyncpg, "_datadog_patch", True)
 
 
-def _unpatch(asyncpg):
+def _unpatch(asyncpg):  # noqa: F811
     # type: (ModuleType) -> None
     unwrap(asyncpg, "connect")
     for method in ("execute", "bind_execute", "query", "bind_execute_many"):
@@ -150,7 +150,7 @@ def _unpatch(asyncpg):
 
 def unpatch():
     # type: () -> None
-    import asyncpg
+    import asyncpg  # noqa: F811
 
     if not getattr(asyncpg, "_datadog_patch", False):
         return

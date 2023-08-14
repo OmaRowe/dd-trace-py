@@ -898,7 +898,6 @@ def do_slice(
     second,  # type: Optional[int]
     third,  # type: Optional[int]
 ):  # type: (...) -> str
-
     # CAVEAT: the following code is duplicate on purpose (also present in production code),
     # because it needs to expose the slicing in order to be patched correctly.
 

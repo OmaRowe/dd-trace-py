@@ -11,10 +11,10 @@ from ddtrace.ext import SpanTypes
 from ddtrace.internal.telemetry.constants import TELEMETRY_NAMESPACE_TAG_APPSEC
 from ddtrace.internal.telemetry.constants import TELEMETRY_TYPE_DISTRIBUTION
 from ddtrace.internal.telemetry.constants import TELEMETRY_TYPE_GENERATE_METRICS
-from tests.appsec.test_processor import Config
+from tests.appsec.test_processor import _BLOCKED_IP
 from tests.appsec.test_processor import ROOT_DIR
 from tests.appsec.test_processor import RULES_GOOD_PATH
-from tests.appsec.test_processor import _BLOCKED_IP
+from tests.appsec.test_processor import Config
 from tests.appsec.test_processor import _enable_appsec
 from tests.utils import override_env
 from tests.utils import override_global_config
@@ -44,7 +44,7 @@ def _assert_distributions_metrics(metrics_result, is_rule_triggered=False, is_bl
     for metric_id, metric in distributions_metrics.items():
         if metric.name in ["waf.duration", "waf.duration_ext"]:
             assert len(metric._points) >= 1
-            assert type(metric._points[0]) is float
+            assert type(metric._points[0]) is float  # noqa: E721
             assert metric._tags["rule_triggered"] == str(is_rule_triggered).lower()
             assert metric._tags["request_blocked"] == str(is_blocked_request).lower()
             assert len(metric._tags["waf_version"]) > 0

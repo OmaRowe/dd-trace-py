@@ -88,7 +88,7 @@ class FeedView(Feed):
 
 partial_view = partial(function_view)
 
-# disabling flake8 test below, yes, declaring a func like this is bad, we know
+# disabling style rule below, yes, declaring a func like this is bad, we know
 lambda_view = lambda request: function_view(request)  # NOQA
 
 

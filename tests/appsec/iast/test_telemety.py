@@ -90,7 +90,6 @@ def test_metric_request_tainted(mock_telemetry_lifecycle_writer):
     with override_env(dict(DD_IAST_TELEMETRY_VERBOSITY="INFORMATION")), override_global_config(
         dict(_iast_enabled=True)
     ):
-
         tracer = DummyTracer(iast_enabled=True)
 
         with tracer.trace("test", span_type=SpanTypes.WEB) as span:

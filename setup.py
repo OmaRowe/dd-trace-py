@@ -1,3 +1,4 @@
+from distutils.command.clean import clean as CleanCommand
 import hashlib
 import os
 import platform
@@ -7,11 +8,12 @@ import subprocess
 import sys
 import tarfile
 
-from setuptools import Extension, find_packages, setup
+from pkg_resources import get_build_platform
+from setuptools import Extension
+from setuptools import find_packages
+from setuptools import setup
 from setuptools.command.build_ext import build_ext
 from setuptools.command.build_py import build_py as BuildPyCommand
-from pkg_resources import get_build_platform
-from distutils.command.clean import clean as CleanCommand
 
 
 try:
@@ -568,7 +570,6 @@ setup(
         "opentracing": ["opentracing>=2.0.0"],
         "openai": ["tiktoken"],
     },
-    tests_require=["flake8"],
     cmdclass={
         "build_ext": CMakeBuild,
         "build_py": LibraryDownloader,

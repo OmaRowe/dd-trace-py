@@ -28,8 +28,8 @@ from ddtrace.internal.remoteconfig.client import ConfigMetadata
 from ddtrace.internal.remoteconfig.client import TargetFile
 from ddtrace.internal.remoteconfig.worker import remoteconfig_poller
 from ddtrace.internal.utils.formats import asbool
-from tests.appsec.test_processor import Config
 from tests.appsec.test_processor import ROOT_DIR
+from tests.appsec.test_processor import Config
 from tests.utils import override_env
 from tests.utils import override_global_config
 
@@ -155,7 +155,6 @@ def test_rc_activation_capabilities(tracer, remote_config_worker, env_rules, exp
 
 def test_rc_activation_validate_products(tracer, remote_config_worker):
     with override_global_config(dict(_appsec_enabled=False, api_version="v0.4")):
-
         assert not remoteconfig_poller._worker
 
         enable_appsec_rc()

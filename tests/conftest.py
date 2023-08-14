@@ -131,7 +131,6 @@ if PY2:
         marshal.dump(code, file)
         file.flush()
 
-
 else:
     import importlib
 

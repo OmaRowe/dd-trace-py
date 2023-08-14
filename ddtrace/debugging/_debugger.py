@@ -5,13 +5,13 @@ import sys
 import threading
 from types import FunctionType
 from types import ModuleType
+from typing import TYPE_CHECKING
 from typing import Any
 from typing import Dict
 from typing import Iterable
 from typing import List
 from typing import Optional
 from typing import Set
-from typing import TYPE_CHECKING
 from typing import Tuple
 from typing import cast
 
@@ -263,7 +263,7 @@ class Debugger(Service):
         )
 
         if ed_config.enabled:
-            from ddtrace.debugging._exception.auto_instrument import SpanExceptionProcessor
+            from ddtrace.debugging._exception.auto_instrument import SpanExceptionProcessor  # noqa: F811
 
             self._span_processor = SpanExceptionProcessor(collector=self._collector)
             self._span_processor.register()

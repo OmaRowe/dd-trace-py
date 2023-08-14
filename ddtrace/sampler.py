@@ -5,11 +5,11 @@ Any `sampled = False` trace won't be written, and can be ignored by the instrume
 import abc
 import json
 import os
+from typing import TYPE_CHECKING
 from typing import Any
 from typing import Dict
 from typing import List
 from typing import Optional
-from typing import TYPE_CHECKING
 from typing import Tuple
 from typing import Union
 
@@ -59,7 +59,6 @@ class SamplingError(Exception):
 
 
 class BaseSampler(six.with_metaclass(abc.ABCMeta)):
-
     __slots__ = ()
 
     @abc.abstractmethod
@@ -68,7 +67,6 @@ class BaseSampler(six.with_metaclass(abc.ABCMeta)):
 
 
 class BasePrioritySampler(BaseSampler):
-
     __slots__ = ()
 
     @abc.abstractmethod

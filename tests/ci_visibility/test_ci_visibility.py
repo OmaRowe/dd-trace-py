@@ -502,7 +502,11 @@ def test_civisibilitywriter_agentless_url_envvar():
 
 
 def test_civisibilitywriter_evp_proxy_url():
-    with override_env(dict(DD_API_KEY="foobar.baz",)), mock.patch(
+    with override_env(
+        dict(
+            DD_API_KEY="foobar.baz",
+        )
+    ), mock.patch(
         "ddtrace.internal.ci_visibility.recorder.CIVisibility._agent_evp_proxy_is_available", return_value=True
     ):
         ddtrace.internal.ci_visibility.writer.config = ddtrace.settings.Config()
@@ -514,7 +518,11 @@ def test_civisibilitywriter_evp_proxy_url():
 
 
 def test_civisibilitywriter_only_traces():
-    with override_env(dict(DD_API_KEY="foobar.baz",)), mock.patch(
+    with override_env(
+        dict(
+            DD_API_KEY="foobar.baz",
+        )
+    ), mock.patch(
         "ddtrace.internal.ci_visibility.recorder.CIVisibility._agent_evp_proxy_is_available", return_value=False
     ):
         ddtrace.internal.ci_visibility.writer.config = ddtrace.settings.Config()

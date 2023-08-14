@@ -27,7 +27,6 @@ from ddtrace import Pin
 from ddtrace import config
 from ddtrace.vendor.wrapt import wrap_function_wrapper as _w
 
-from .. import trace_utils
 from ...constants import ANALYTICS_SAMPLE_RATE_KEY
 from ...constants import SPAN_MEASURED_KEY
 from ...contrib.wsgi.wsgi import _DDWSGIMiddlewareBase
@@ -37,6 +36,7 @@ from ...internal.compat import maybe_stringify
 from ...internal.logger import get_logger
 from ...internal.utils import get_argument_value
 from ...internal.utils.version import parse_version
+from .. import trace_utils
 from ..trace_utils import _get_request_header_user_agent
 from ..trace_utils import _set_url_tag
 from ..trace_utils import unwrap as _u

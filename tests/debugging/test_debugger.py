@@ -85,7 +85,6 @@ def test_debugger_line_probe_on_instance_method():
 
 
 def test_debugger_line_probe_on_imported_module_function():
-
     lineno = min(linenos(imported_modulestuff))
     snapshots = simple_debugger_test(
         create_snapshot_line_probe(
@@ -933,7 +932,7 @@ def test_debugger_log_live_probe_generate_messages():
                     " ",
                     {"dsl": "bar", "json": {"ref": "bar"}},
                     "!",
-                )
+                ),
             ),
         )
 
@@ -1073,7 +1072,7 @@ def test_debugger_modified_probe():
                 version=1,
                 source_file="tests/submod/stuff.py",
                 line=36,
-                **compile_template("hello world")
+                **compile_template("hello world"),
             )
         )
 
@@ -1091,7 +1090,7 @@ def test_debugger_modified_probe():
                 version=2,
                 source_file="tests/submod/stuff.py",
                 line=36,
-                **compile_template("hello brave new world")
+                **compile_template("hello brave new world"),
             )
         )
 
