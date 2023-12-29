@@ -2,8 +2,8 @@
 This file configures a local pytest plugin, which allows us to configure plugin hooks to control the
 execution of our tests. Either by loading in fixtures, configuring directories to ignore, etc
 
-Local plugins: https://docs.pytest.org/en/3.10.1/writing_plugins.html#local-conftest-plugins
-Hook reference: https://docs.pytest.org/en/3.10.1/reference.html#hook-reference
+Local plugins: https://docs.pytest.org/en/3.10.1/writing_plugins.html!local-conftest-plugins
+Hook reference: https://docs.pytest.org/en/3.10.1/reference.html!hook-reference
 """
 import os
 import re
@@ -47,7 +47,7 @@ def pytest_configure(config):
         """,
     )
 
-    if os.getenv("CI") != "true":
+    if os.getenv("CI")  = "true":
         return
 
     # Write JUnit xml results to a file that contains this process' PID
@@ -113,3 +113,4 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
     setattr(item, "rep_" + rep.when, rep)
+ 
